@@ -1,0 +1,27 @@
+
+entity Serie {
+	id Long
+	name String
+    priceInEuro Float 
+    dateTimeAdd Instant
+}
+
+entity Season {
+	id Long
+    name String
+}
+
+entity Episode {
+	id Long
+    name String
+}
+
+relationship OneToMany {
+	Season to Serie{season}
+}
+
+relationship OneToMany {
+	Episode to Season{episode}
+}
+
+
