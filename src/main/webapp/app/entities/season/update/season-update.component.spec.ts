@@ -8,8 +8,8 @@ import { of, Subject, from } from 'rxjs';
 
 import { SeasonService } from '../service/season.service';
 import { ISeason, Season } from '../season.model';
-import { IEpisode } from 'app/entities/episode/episode.model';
-import { EpisodeService } from 'app/entities/episode/service/episode.service';
+import { ISerie } from 'app/entities/serie/serie.model';
+import { SerieService } from 'app/entities/serie/service/serie.service';
 
 import { SeasonUpdateComponent } from './season-update.component';
 
@@ -18,7 +18,7 @@ describe('Season Management Update Component', () => {
   let fixture: ComponentFixture<SeasonUpdateComponent>;
   let activatedRoute: ActivatedRoute;
   let seasonService: SeasonService;
-  let episodeService: EpisodeService;
+  let serieService: SerieService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -40,41 +40,41 @@ describe('Season Management Update Component', () => {
     fixture = TestBed.createComponent(SeasonUpdateComponent);
     activatedRoute = TestBed.inject(ActivatedRoute);
     seasonService = TestBed.inject(SeasonService);
-    episodeService = TestBed.inject(EpisodeService);
+    serieService = TestBed.inject(SerieService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should call Episode query and add missing value', () => {
+    it('Should call Serie query and add missing value', () => {
       const season: ISeason = { id: 456 };
-      const episode: IEpisode = { id: 74731 };
-      season.episode = episode;
+      const serie: ISerie = { id: 69732 };
+      season.serie = serie;
 
-      const episodeCollection: IEpisode[] = [{ id: 7660 }];
-      jest.spyOn(episodeService, 'query').mockReturnValue(of(new HttpResponse({ body: episodeCollection })));
-      const additionalEpisodes = [episode];
-      const expectedCollection: IEpisode[] = [...additionalEpisodes, ...episodeCollection];
-      jest.spyOn(episodeService, 'addEpisodeToCollectionIfMissing').mockReturnValue(expectedCollection);
+      const serieCollection: ISerie[] = [{ id: 17459 }];
+      jest.spyOn(serieService, 'query').mockReturnValue(of(new HttpResponse({ body: serieCollection })));
+      const additionalSeries = [serie];
+      const expectedCollection: ISerie[] = [...additionalSeries, ...serieCollection];
+      jest.spyOn(serieService, 'addSerieToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ season });
       comp.ngOnInit();
 
-      expect(episodeService.query).toHaveBeenCalled();
-      expect(episodeService.addEpisodeToCollectionIfMissing).toHaveBeenCalledWith(episodeCollection, ...additionalEpisodes);
-      expect(comp.episodesSharedCollection).toEqual(expectedCollection);
+      expect(serieService.query).toHaveBeenCalled();
+      expect(serieService.addSerieToCollectionIfMissing).toHaveBeenCalledWith(serieCollection, ...additionalSeries);
+      expect(comp.seriesSharedCollection).toEqual(expectedCollection);
     });
 
     it('Should update editForm', () => {
       const season: ISeason = { id: 456 };
-      const episode: IEpisode = { id: 16325 };
-      season.episode = episode;
+      const serie: ISerie = { id: 7537 };
+      season.serie = serie;
 
       activatedRoute.data = of({ season });
       comp.ngOnInit();
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(season));
-      expect(comp.episodesSharedCollection).toContain(episode);
+      expect(comp.seriesSharedCollection).toContain(serie);
     });
   });
 
@@ -143,10 +143,10 @@ describe('Season Management Update Component', () => {
   });
 
   describe('Tracking relationships identifiers', () => {
-    describe('trackEpisodeById', () => {
-      it('Should return tracked Episode primary key', () => {
+    describe('trackSerieById', () => {
+      it('Should return tracked Serie primary key', () => {
         const entity = { id: 123 };
-        const trackResult = comp.trackEpisodeById(0, entity);
+        const trackResult = comp.trackSerieById(0, entity);
         expect(trackResult).toEqual(entity.id);
       });
     });

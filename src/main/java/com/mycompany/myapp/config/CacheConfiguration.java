@@ -56,6 +56,8 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.Season.class.getName() + ".series");
             createCache(cm, com.mycompany.myapp.domain.Episode.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Episode.class.getName() + ".seasons");
+            createCache(cm, com.mycompany.myapp.domain.Serie.class.getName() + ".seasons");
+            createCache(cm, com.mycompany.myapp.domain.Season.class.getName() + ".episodes");
             // jhipster-needle-ehcache-add-entry
         };
     }

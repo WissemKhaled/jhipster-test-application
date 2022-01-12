@@ -48,19 +48,6 @@
             />
           </div>
         </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="jhipsterTestApplicationApp.serie.season" for="field_season">Season</label>
-          <select class="form-control" id="field_season" data-cy="season" name="season" formControlName="season">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="seasonOption.id === editForm.get('season')!.value?.id ? editForm.get('season')!.value : seasonOption"
-              *ngFor="let seasonOption of seasonsSharedCollection; trackBy: trackSeasonById"
-            >
-              {{ seasonOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>

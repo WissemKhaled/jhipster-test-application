@@ -6,7 +6,7 @@ export interface ISerie {
   name?: string | null;
   priceInEuro?: number | null;
   dateTimeAdd?: dayjs.Dayjs | null;
-  season?: ISeason | null;
+  seasons?: ISeason[] | null;
 }
 
 export class Serie implements ISerie {
@@ -15,7 +15,7 @@ export class Serie implements ISerie {
     public name?: string | null,
     public priceInEuro?: number | null,
     public dateTimeAdd?: dayjs.Dayjs | null,
-    public season?: ISeason | null
+    public seasons?: ISeason[] | null
   ) {}
 }
 

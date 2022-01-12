@@ -34,6 +34,7 @@
         <tr>
           <th scope="col"><span jhiTranslate="jhipsterTestApplicationApp.episode.id">Id</span></th>
           <th scope="col"><span jhiTranslate="jhipsterTestApplicationApp.episode.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="jhipsterTestApplicationApp.episode.season">Season</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -43,6 +44,11 @@
             <a [routerLink]="['/episode', episode.id, 'view']">{{ episode.id }}</a>
           </td>
           <td>{{ episode.name }}</td>
+          <td>
+            <div *ngIf="episode.season">
+              <a [routerLink]="['/season', episode.season?.id, 'view']">{{ episode.season?.id }}</a>
+            </div>
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

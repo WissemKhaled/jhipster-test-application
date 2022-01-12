@@ -7,8 +7,8 @@ import { finalize, map } from 'rxjs/operators';
 
 import { ISeason, Season } from '../season.model';
 import { SeasonService } from '../service/season.service';
-import { IEpisode } from 'app/entities/episode/episode.model';
-import { EpisodeService } from 'app/entities/episode/service/episode.service';
+import { ISerie } from 'app/entities/serie/serie.model';
+import { SerieService } from 'app/entities/serie/service/serie.service';
 
 @Component({
   selector: 'jhi-season-update',
@@ -17,17 +17,17 @@ import { EpisodeService } from 'app/entities/episode/service/episode.service';
 export class SeasonUpdateComponent implements OnInit {
   isSaving = false;
 
-  episodesSharedCollection: IEpisode[] = [];
+  seriesSharedCollection: ISerie[] = [];
 
   editForm = this.fb.group({
     id: [],
     name: [],
-    episode: [],
+    serie: [],
   });
 
   constructor(
     protected seasonService: SeasonService,
-    protected episodeService: EpisodeService,
+    protected serieService: SerieService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -54,7 +54,7 @@ export class SeasonUpdateComponent implements OnInit {
     }
   }
 
-  trackEpisodeById(index: number, item: IEpisode): number {
+  trackSerieById(index: number, item: ISerie): number {
     return item.id!;
   }
 
@@ -81,20 +81,18 @@ export class SeasonUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: season.id,
       name: season.name,
-      episode: season.episode,
+      serie: season.serie,
     });
 
-    this.episodesSharedCollection = this.episodeService.addEpisodeToCollectionIfMissing(this.episodesSharedCollection, season.episode);
+    this.seriesSharedCollection = this.serieService.addSerieToCollectionIfMissing(this.seriesSharedCollection, season.serie);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.episodeService
+    this.serieService
       .query()
-      .pipe(map((res: HttpResponse<IEpisode[]>) => res.body ?? []))
-      .pipe(
-        map((episodes: IEpisode[]) => this.episodeService.addEpisodeToCollectionIfMissing(episodes, this.editForm.get('episode')!.value))
-      )
-      .subscribe((episodes: IEpisode[]) => (this.episodesSharedCollection = episodes));
+      .pipe(map((res: HttpResponse<ISerie[]>) => res.body ?? []))
+      .pipe(map((series: ISerie[]) => this.serieService.addSerieToCollectionIfMissing(series, this.editForm.get('serie')!.value)))
+      .subscribe((series: ISerie[]) => (this.seriesSharedCollection = series));
   }
 
   protected createFromForm(): ISeason {
@@ -102,7 +100,7 @@ export class SeasonUpdateComponent implements OnInit {
       ...new Season(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      episode: this.editForm.get(['episode'])!.value,
+      serie: this.editForm.get(['serie'])!.value,
     };
   }
 }
