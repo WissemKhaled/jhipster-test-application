@@ -1,0 +1,25 @@
+{
+  "jhipsterTestApplicationApp": {
+    "episode": {
+      "home": {
+        "title": "Episodes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Episode",
+        "createOrEditLabel": "创建或编辑 Episode",
+        "notFound": "No Episodes found"
+      },
+      "created": "Episode {{ param }} 创建成功",
+      "updated": "Episode {{ param }} 更新成功",
+      "deleted": "Episode {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Episode {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Episode"
+      },
+      "id": "Id",
+      "name": "Name",
+      "season": "Season"
+    }
+  }
+}
