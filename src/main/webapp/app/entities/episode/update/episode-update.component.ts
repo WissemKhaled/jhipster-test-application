@@ -3,10 +3,12 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import { IEpisode, Episode } from '../episode.model';
 import { EpisodeService } from '../service/episode.service';
+import { ISeason } from 'app/entities/season/season.model';
+import { SeasonService } from 'app/entities/season/service/season.service';
 
 @Component({
   selector: 'jhi-episode-update',
@@ -15,16 +17,26 @@ import { EpisodeService } from '../service/episode.service';
 export class EpisodeUpdateComponent implements OnInit {
   isSaving = false;
 
+  seasonsSharedCollection: ISeason[] = [];
+
   editForm = this.fb.group({
     id: [],
     name: [],
+    season: [],
   });
 
-  constructor(protected episodeService: EpisodeService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected episodeService: EpisodeService,
+    protected seasonService: SeasonService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ episode }) => {
       this.updateForm(episode);
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -40,6 +52,10 @@ export class EpisodeUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.episodeService.create(episode));
     }
+  }
+
+  trackSeasonById(index: number, item: ISeason): number {
+    return item.id!;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IEpisode>>): void {
@@ -65,7 +81,18 @@ export class EpisodeUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: episode.id,
       name: episode.name,
+      season: episode.season,
     });
+
+    this.seasonsSharedCollection = this.seasonService.addSeasonToCollectionIfMissing(this.seasonsSharedCollection, episode.season);
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.seasonService
+      .query()
+      .pipe(map((res: HttpResponse<ISeason[]>) => res.body ?? []))
+      .pipe(map((seasons: ISeason[]) => this.seasonService.addSeasonToCollectionIfMissing(seasons, this.editForm.get('season')!.value)))
+      .subscribe((seasons: ISeason[]) => (this.seasonsSharedCollection = seasons));
   }
 
   protected createFromForm(): IEpisode {
@@ -73,6 +100,7 @@ export class EpisodeUpdateComponent implements OnInit {
       ...new Episode(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
+      season: this.editForm.get(['season'])!.value,
     };
   }
 }

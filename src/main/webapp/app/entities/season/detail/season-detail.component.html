@@ -18,10 +18,10 @@
         <dd>
           <span>{{ season.name }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipsterTestApplicationApp.season.episode">Episode</span></dt>
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.season.serie">Serie</span></dt>
         <dd>
-          <div *ngIf="season.episode">
-            <a [routerLink]="['/episode', season.episode?.id, 'view']">{{ season.episode?.id }}</a>
+          <div *ngIf="season.serie">
+            <a [routerLink]="['/serie', season.serie?.id, 'view']">{{ season.serie?.id }}</a>
           </div>
         </dd>
       </dl>

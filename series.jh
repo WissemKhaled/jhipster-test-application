@@ -17,11 +17,11 @@ entity Episode {
 }
 
 relationship OneToMany {
-	Season to Serie{season}
+	Serie{season} to Season
 }
 
 relationship OneToMany {
-	Episode to Season{episode}
+	Season{episode} to Episode
 }
 
 

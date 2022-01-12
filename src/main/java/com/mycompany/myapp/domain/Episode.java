@@ -2,8 +2,6 @@ package com.mycompany.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -26,10 +24,9 @@ public class Episode implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "episode")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "series", "episode" }, allowSetters = true)
-    private Set<Season> seasons = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "episodes", "serie" }, allowSetters = true)
+    private Season season;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -59,34 +56,16 @@ public class Episode implements Serializable {
         this.name = name;
     }
 
-    public Set<Season> getSeasons() {
-        return this.seasons;
+    public Season getSeason() {
+        return this.season;
     }
 
-    public void setSeasons(Set<Season> seasons) {
-        if (this.seasons != null) {
-            this.seasons.forEach(i -> i.setEpisode(null));
-        }
-        if (seasons != null) {
-            seasons.forEach(i -> i.setEpisode(this));
-        }
-        this.seasons = seasons;
+    public void setSeason(Season season) {
+        this.season = season;
     }
 
-    public Episode seasons(Set<Season> seasons) {
-        this.setSeasons(seasons);
-        return this;
-    }
-
-    public Episode addSeason(Season season) {
-        this.seasons.add(season);
-        season.setEpisode(this);
-        return this;
-    }
-
-    public Episode removeSeason(Season season) {
-        this.seasons.remove(season);
-        season.setEpisode(null);
+    public Episode season(Season season) {
+        this.setSeason(season);
         return this;
     }
 

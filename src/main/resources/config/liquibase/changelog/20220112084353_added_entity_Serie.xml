@@ -23,9 +23,6 @@
             <column name="date_time_add" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="season_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="serie" columnName="date_time_add" columnDataType="${datetimeType}"/>

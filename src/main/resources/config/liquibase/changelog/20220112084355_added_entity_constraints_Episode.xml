@@ -4,14 +4,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
     <!--
-        Added the constraints for entity Season.
+        Added the constraints for entity Episode.
     -->
-    <changeSet id="20220112084354-2" author="jhipster">
+    <changeSet id="20220112084355-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="serie_id"
-                                 baseTableName="season"
-                                 constraintName="fk_season__serie_id"
+        <addForeignKeyConstraint baseColumnNames="season_id"
+                                 baseTableName="episode"
+                                 constraintName="fk_episode__season_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="serie"/>
+                                 referencedTableName="season"/>
     </changeSet>
 </databaseChangeLog>

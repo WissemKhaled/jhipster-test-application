@@ -26,12 +26,6 @@
         <dd>
           <span>{{ serie.dateTimeAdd | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipsterTestApplicationApp.serie.season">Season</span></dt>
-        <dd>
-          <div *ngIf="serie.season">
-            <a [routerLink]="['/season', serie.season?.id, 'view']">{{ serie.season?.id }}</a>
-          </div>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
