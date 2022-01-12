@@ -1,0 +1,27 @@
+{
+  "jhipsterTestApplicationApp": {
+    "serie": {
+      "home": {
+        "title": "Series",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Serie",
+        "createOrEditLabel": "创建或编辑 Serie",
+        "notFound": "No Series found"
+      },
+      "created": "Serie {{ param }} 创建成功",
+      "updated": "Serie {{ param }} 更新成功",
+      "deleted": "Serie {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Serie {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Serie"
+      },
+      "id": "Id",
+      "name": "Name",
+      "priceInEuro": "Price In Euro",
+      "dateTimeAdd": "Date Time Add",
+      "season": "Season"
+    }
+  }
+}

@@ -42,7 +42,9 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "reactive": false,
-    "enableGradleEnterprise": false
+    "enableGradleEnterprise": false,
+    "entities": ["Serie", "Season", "Episode"],
+    "lastLiquibaseTimestamp": 1641977035000
   },
   "git-provider": "GitHub",
   "git-company": "WissemKhaled",

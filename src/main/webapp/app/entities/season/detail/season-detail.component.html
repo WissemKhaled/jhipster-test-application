@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="season">
+      <h2 data-cy="seasonDetailsHeading"><span jhiTranslate="jhipsterTestApplicationApp.season.detail.title">Season</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.season.id">Id</span></dt>
+        <dd>
+          <span>{{ season.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.season.name">Name</span></dt>
+        <dd>
+          <span>{{ season.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.season.episode">Episode</span></dt>
+        <dd>
+          <div *ngIf="season.episode">
+            <a [routerLink]="['/episode', season.episode?.id, 'view']">{{ season.episode?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/season', season.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

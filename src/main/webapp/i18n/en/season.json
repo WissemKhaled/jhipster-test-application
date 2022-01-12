@@ -1,0 +1,26 @@
+{
+  "jhipsterTestApplicationApp": {
+    "season": {
+      "home": {
+        "title": "Seasons",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Season",
+        "createOrEditLabel": "Create or edit a Season",
+        "notFound": "No Seasons found"
+      },
+      "created": "A new Season is created with identifier {{ param }}",
+      "updated": "A Season is updated with identifier {{ param }}",
+      "deleted": "A Season is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Season {{ id }}?"
+      },
+      "detail": {
+        "title": "Season"
+      },
+      "id": "Id",
+      "name": "Name",
+      "serie": "Serie",
+      "episode": "Episode"
+    }
+  }
+}

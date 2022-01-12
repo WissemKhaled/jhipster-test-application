@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="serie">
+      <h2 data-cy="serieDetailsHeading"><span jhiTranslate="jhipsterTestApplicationApp.serie.detail.title">Serie</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.serie.id">Id</span></dt>
+        <dd>
+          <span>{{ serie.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.serie.name">Name</span></dt>
+        <dd>
+          <span>{{ serie.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.serie.priceInEuro">Price In Euro</span></dt>
+        <dd>
+          <span>{{ serie.priceInEuro }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.serie.dateTimeAdd">Date Time Add</span></dt>
+        <dd>
+          <span>{{ serie.dateTimeAdd | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterTestApplicationApp.serie.season">Season</span></dt>
+        <dd>
+          <div *ngIf="serie.season">
+            <a [routerLink]="['/season', serie.season?.id, 'view']">{{ serie.season?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/serie', serie.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

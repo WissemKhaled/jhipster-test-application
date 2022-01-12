@@ -1,0 +1,39 @@
+{
+  "name": "Serie",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "priceInEuro",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "dateTimeAdd",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "season",
+      "otherEntityRelationshipName": "serie",
+      "relationshipName": "season"
+    }
+  ],
+  "entityTableName": "serie",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20220112084353"
+}
